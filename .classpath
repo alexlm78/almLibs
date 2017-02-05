@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/activation.jar"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/commons-net-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/imap.jar"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/jt400.jar"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/smtp.jar"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/sqlite-jdbc-3.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/alexlm78/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
