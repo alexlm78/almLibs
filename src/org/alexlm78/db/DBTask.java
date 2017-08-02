@@ -26,6 +26,7 @@ public class DBTask
 	 * Estado del registro del JDBC.
 	 */
 	private boolean registroJDBC=false;
+	private boolean DEBUG = false;
 
 	/**
 	 * Contructor.
@@ -62,7 +63,7 @@ public class DBTask
 			{
 				Class.forName(driver);
 				registroJDBC=true;
-				log.debug("Se ha regitrado el puente JDBC: " + driver);
+				if ( isDEBUG() ) log.debug("Se ha regitrado el puente JDBC: " + driver);
 			}
 		}catch(ClassNotFoundException ex)
 		 {
@@ -86,7 +87,7 @@ public class DBTask
 			if ( registroJDBC )
 			{
 				dbConn = DriverManager.getConnection(url,user,pass);
-				log.debug("Conectado con " + dbConn.toString() + " mediante JDBC ("+url+")");
+				if ( isDEBUG() ) log.debug("Conectado con " + dbConn.toString() + " mediante JDBC ("+url+")");
 			}else
 				throw new SQLException("No esta definido un puente JDBC!.");
 		}catch ( SQLException ex )
@@ -147,5 +148,13 @@ public class DBTask
 		 {
 			log.error(sex.getMessage());
 		 }
+	}
+
+	public boolean isDEBUG() {
+		return DEBUG;
+	}
+
+	public void setDEBUG(boolean debug) {
+		DEBUG = debug;
 	}
 }
