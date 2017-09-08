@@ -1,4 +1,4 @@
-package org.alexlm78.utils;
+package org.alexlm78.utils.fechas;
 
 import java.util.ArrayList;
 import org.apache.log4j.Logger;
@@ -35,14 +35,14 @@ public class ManejoFechas
 		if ( Integer.parseInt(fAnio) < Integer.parseInt(iAnio) )
 			throw new Exception("La fecha final ocurre antes que la inicial.");
 		
-		// Involucra dos años distitos, por lo que lo partimos y procesamos recursicamente.
+		// Involucra dos aï¿½os distitos, por lo que lo partimos y procesamos recursicamente.
 		if ( Integer.parseInt(fAnio) > Integer.parseInt(iAnio) )
 		{
 			rVal.addAll( getParticiones(inicio, getFinAnio(Integer.parseInt(iAnio))) );
 			rVal.addAll( getParticiones(getInicioAnio(Integer.parseInt(fAnio)), fin) );
 		}
 		
-		// Dentro del mismo año.
+		// Dentro del mismo aï¿½o.
 		if ( getAnio(fin).compareTo(getAnio(inicio)) == 0 )
 		{
 			difDias = Integer.parseInt(getAnio(inicio)+getMes(inicio));
@@ -80,7 +80,7 @@ public class ManejoFechas
 		String fAnio = getAnio(fin);
 		
 		if ( Integer.parseInt(fAnio)-Integer.parseInt(iAnio) >= 2 )
-			throw new Exception("El periodo de generacion no puede exceder de 2 años completos.");
+			throw new Exception("El periodo de generacion no puede exceder de 2 aï¿½os completos.");
 		
 		if ( Integer.parseInt(fAnio) < Integer.parseInt(iAnio) )
 			throw new Exception("La fecha final ocurre antes que la inicial.");
@@ -159,7 +159,7 @@ public class ManejoFechas
 	}
 	
 	/**
-	 * Obtiene el año de una fecha en formato numerico (yyyymmdd).
+	 * Obtiene el aï¿½o de una fecha en formato numerico (yyyymmdd).
 	 * 
 	 * @param fecha Fecha fecha en formato numerico.
 	 * @return El mes de la fecha enviada.
@@ -181,10 +181,10 @@ public class ManejoFechas
 	}
 	
 	/**
-	 * Obtiene la fecha del ultimo dia del año.
+	 * Obtiene la fecha del ultimo dia del aï¿½o.
 	 * 
-	 * @param anio Año a considerar.
-	 * @return fecha en numerico del fin de año.
+	 * @param anio Aï¿½o a considerar.
+	 * @return fecha en numerico del fin de aï¿½o.
 	 */
 	public static int getFinAnio( int anio )
 	{
@@ -192,10 +192,10 @@ public class ManejoFechas
 	}
 	
 	/**
-	 * Obtiene la fecha del primer dia del año.
+	 * Obtiene la fecha del primer dia del aï¿½o.
 	 * 
-	 * @param anio Año a considerar.
-	 * @return fecha en numerico del fin de año.
+	 * @param anio Aï¿½o a considerar.
+	 * @return fecha en numerico del fin de aï¿½o.
 	 */
 	public static int getInicioAnio( int anio )
 	{
