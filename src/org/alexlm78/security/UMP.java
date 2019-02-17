@@ -4,6 +4,7 @@
 package org.alexlm78.security;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
@@ -31,6 +32,9 @@ public class UMP
 	public static boolean Authorized( String user, String module )
 	{
 		boolean bRes=false;
+		Connection Conn = null;
+		Statement Stmt = null;
+		ResultSet Ress = null;
 		
 		try
 		{
@@ -43,24 +47,25 @@ public class UMP
 			
 			// Define the conection class
 			String urlConn = "jdbc:as400://"+ ipConnection + "/;libraries="+ schema + ",PASO,GUAV1,GUARDBV1,TFSOBMX1,QTEMP;prompt=false;naming=sql;errors=full";
-			DBTask db = new DBTask("com.ibm.as400.access.AS400JDBCDriver");
-			db.Conectar(urlConn, usrConn, pasConn);
-			Connection con = db.getConexion();
-			Statement st = con.createStatement();
-			ResultSet res = st.executeQuery(query);
+			Class.forName("com.ibm.as400.access.AS400JDBCDriver");
 			
-			if( res.next() )
+			Conn = DriverManager.getConnection(urlConn,usrConn,pasConn);
+			Stmt = Conn.createStatement();
+			Ress = Stmt.executeQuery(query);
+			
+			if( Ress.next() )
 				bRes = true;
 			
-			res.close();
-			st.close();
-			con.close();
-			
 		}catch ( Exception ex )
-		 {
+		{
 			log.error(ex.getMessage());
 			bRes = false;
-		 }
+		}finally
+		{
+			try{ if(Ress != null){Ress.close(); Ress=null;}  }catch(Exception ex){}
+			try{ if(Stmt != null){Stmt.close(); Stmt=null;}  }catch(Exception ex){}
+			try{ if(Conn != null){Conn.close(); Conn=null;}  }catch(Exception ex){}
+		}
 		
 		return bRes;
 	}
@@ -73,6 +78,9 @@ public class UMP
 	public static boolean Security()
 	{
 		boolean bRes=false;
+		Connection Conn = null;
+		Statement Stmt = null;
+		ResultSet Ress = null;
 		
 		try
 		{
@@ -81,30 +89,31 @@ public class UMP
 			String usrConn = props.getProperty("User");
 			String pasConn = props.getProperty("Pass");
 			String schema = props.getProperty("Schema");
+			
 			String query = "SELECT * FROM GUAV1.MNUSER WHERE USRID='JL637879' AND USRSTS=''";
 			
 			// Definimos la forma de conexion de la clase
 			String urlConn = "jdbc:as400://"+ ipConnection + "/;libraries="+ schema + ",PASO,GUAV1,GUARDBV1,TFSOBMX1,QTEMP;prompt=false;naming=sql;errors=full";
-			DBTask db = new DBTask("com.ibm.as400.access.AS400JDBCDriver");
-			db.Conectar(urlConn, usrConn, pasConn);
-			Connection con = db.getConexion();
-			Statement st = con.createStatement();
-			ResultSet res = st.executeQuery(query);
+			Class.forName("com.ibm.as400.access.AS400JDBCDriver");
 			
-			if( res.next() )
+			Conn = DriverManager.getConnection(urlConn, usrConn, pasConn);
+			Stmt = Conn.createStatement();
+			Ress = Stmt.executeQuery(query);
+			
+			if( Ress.next() )
 				bRes = true;
 			
-			res.close();
-			st.close();
-			con.close();
-			
 		}catch ( Exception ex )
-		 {
+		{
 			log.error(ex.getMessage());
 			bRes = false;
-		 }
+		}finally
+		{
+			try{ if(Ress != null){Ress.close(); Ress=null;}  }catch(Exception ex){}
+			try{ if(Stmt != null){Stmt.close(); Stmt=null;}  }catch(Exception ex){}
+			try{ if(Conn != null){Conn.close(); Conn=null;}  }catch(Exception ex){}
+		}
 		
 		return bRes;
 	}
-
 }

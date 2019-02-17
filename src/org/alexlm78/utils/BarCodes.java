@@ -3,12 +3,12 @@ package org.alexlm78.utils;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-import net.sourceforge.jbarcodebean.JBarcodeBean;
-import net.sourceforge.jbarcodebean.model.Code39;
+//import net.sourceforge.jbarcodebean.JBarcodeBean;
+//import net.sourceforge.jbarcodebean.model.Code39;
 //import net.sourceforge.jbarcodebean.model.Interleaved25;
 
 public class BarCodes 
-{
+{/*
 	public static void testBarCode() 
 	{
 		try 
@@ -35,5 +35,5 @@ public class BarCodes
 		}
 
     }
-
+*/
 }

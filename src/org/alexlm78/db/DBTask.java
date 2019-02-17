@@ -1,8 +1,6 @@
 package org.alexlm78.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import org.apache.log4j.Logger;
 
 /**
@@ -135,12 +133,10 @@ public class DBTask
 	
 	/**
 	 * Cierra la conexion establecida.
-	 * 
-	 * @param con Conexion para cerrar.
 	 */
 	public void Cerrar()
 	{
-		try 
+		try
 		{
 			if ( !dbConn.isClosed() )
 				dbConn.close();
@@ -149,6 +145,27 @@ public class DBTask
 			log.error(sex.getMessage());
 		 }
 	}
+	
+	public Integer getCountRows( String table) throws SQLException
+	{
+		Connection Conn = null;
+		Statement Stmt = null;
+		ResultSet Ress = null;
+		
+		String query = "SELECT * FROM "+table.toUpperCase();
+		
+		Conn = getConexion();
+		Stmt = Conn.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
+		Ress = Stmt.executeQuery(query);
+		
+		Integer rows = 0;
+		Ress.last();
+		rows = Integer.valueOf(Ress.getRow());
+		Ress.beforeFirst();
+		
+		return rows;
+	}
+	
 
 	public boolean isDEBUG() {
 		return DEBUG;
